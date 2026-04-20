@@ -7,6 +7,8 @@ type Store interface {
 	HasPermission(ctx context.Context, subjectID string, resourceID string, permission string) (bool, error)
 	GrantPermission(ctx context.Context, subjectID string, resourceID string, permission string) error
 	RevokePermission(ctx context.Context, subjectID string, resourceID string, permission string) error
+	CreateResource(ctx context.Context, resourceID string, name string, parent *string) error
+	DeleteResource(ctx context.Context, resourceID string) error
 }
 
 // Service provides authorization capabilities by interacting with the storage layer.
@@ -32,4 +34,14 @@ func (s *Service) GrantPermission(ctx context.Context, subjectID string, resourc
 // RevokePermission revokes the requested permission on the resource from the subject.
 func (s *Service) RevokePermission(ctx context.Context, subjectID string, resourceID string, permission string) error {
 	return s.store.RevokePermission(ctx, subjectID, resourceID, permission)
+}
+
+// CreateResource creates a resource in the backing store.
+func (s *Service) CreateResource(ctx context.Context, resourceID string, name string, parent *string) error {
+	return s.store.CreateResource(ctx, resourceID, name, parent)
+}
+
+// DeleteResource deletes a resource from the backing store.
+func (s *Service) DeleteResource(ctx context.Context, resourceID string) error {
+	return s.store.DeleteResource(ctx, resourceID)
 }
