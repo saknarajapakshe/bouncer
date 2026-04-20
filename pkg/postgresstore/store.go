@@ -51,3 +51,4 @@ func (s *PostgresStore) DeleteResource(ctx context.Context, resourceID string) e
 	_, err := s.db.ExecContext(ctx, postgres.QueryDeleteResource, resourceID)
 	return err
 }
+

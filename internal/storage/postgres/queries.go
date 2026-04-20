@@ -1,7 +1,6 @@
 package postgres
 
 // SQL query constants for permission and resource management.
-
 const (
 	// QueryHasPermission checks if a permission grant exists.
 	QueryHasPermission = `
